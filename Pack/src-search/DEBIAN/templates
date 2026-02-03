@@ -1,0 +1,29 @@
+Template: r7mailsearch/db-host
+Type: string
+Default: localhost
+Description: Database host:
+
+Template: r7mailsearch/db-port
+Type: string
+Default:5432
+Description: Database port:
+
+Template: r7mailsearch/db-name
+Type: string
+Default: r7mailserver
+Description: Database name:
+
+Template: r7mailsearch/db-user
+Type: string
+Default: r7mailuser
+Description: Database user:
+
+Template: r7mailsearch/db-pwd
+Type: password
+Default: saSA123$
+Description: Database password:
+
+Template: r7mailsearch/upgrade
+Type: boolean
+Default: false
+Description: upgrade

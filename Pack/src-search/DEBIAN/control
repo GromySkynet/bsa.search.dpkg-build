@@ -1,0 +1,12 @@
+Package: r7mailsearch
+Version: 2025.1.0.000
+Architecture: amd64
+Maintainer: SBatyrgareev <batyrgareev.stanislav@r7-office.ru>
+Installed-Size: 40894464
+Depends: openssl, dotnet-sdk-6.0, aspnetcore-runtime-6.0, postgresql-client-15, supervisor, sed, jq, debconf
+Section: mail
+Priority: optional
+Homepage: https://bsasearch.org
+Description: Search indexer
+
+

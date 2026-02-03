@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    purge|abort-install|disappear)
+        if [ -f /usr/share/debconf/confmodule ]; then
+            . /usr/share/debconf/confmodule
+            db_purge
+            db_stop
+        fi
+        ;;
+esac
+
+exit 0

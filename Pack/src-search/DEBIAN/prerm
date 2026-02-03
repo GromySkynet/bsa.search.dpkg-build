@@ -1,0 +1,34 @@
+#!/bin/sh
+
+case "$1" in
+    failed-upgrade|abort-install|abort-upgrade|disappear|upgrade)
+    ;;
+    remove|purge)
+        #Clear config manage process
+        if [ -f /etc/supervisor/conf.d/mailsearch_program.conf ]; then
+	        rm -f /etc/supervisor/conf.d/mailsearch_program.conf >/dev/null 2>&1
+        fi
+#        if [ -f /etc/supervisor/conf.d/mailfilter_group.conf ]; then
+#	        rm -f /etc/supervisor/conf.d/mailfilter_group.conf >/dev/null 2>&1
+#        fi
+
+        echo "Remove mailsearch files"
+        if [ -d /opt/r7-mailserver/mailsearch ]; then
+	        rm -f -r /opt/r7-mailserver/mailsearch >/dev/null 2>&1
+        fi
+        systemctl reload supervisor || true
+
+        #Clear log files
+        if [ "$1" = "purge" ]; then
+            echo "Remove mailsearch log-files"
+            if [ -d /var/log/r7-office/Bsa.Search.Api.Host ]; then
+	            rm -f -r /var/log/r7-office/Bsa.Search.Api.Host >/dev/null 2>&1
+        fi
+fi
+    ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+esac
+
+exit 0

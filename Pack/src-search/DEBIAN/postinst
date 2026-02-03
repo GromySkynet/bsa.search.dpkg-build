@@ -1,0 +1,66 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+
+APP_DIR=/opt/r7-mailserver/mailsearch
+APP_CONF=$APP_DIR/appsettings.json
+
+read_params_debconf()
+{
+	echo "Reading parameters..."
+#    db_get r7mailfilter/db-host || true
+#    MF_DB_HOST="${RET:-localhost}"
+#    db_get r7mailfilter/db-port || true
+#    MF_DB_PORT="${RET:-5432}"
+#	db_get r7mailfilter/db-name || true
+#    MF_DB_NAME="${RET:-r7mailserver}"
+#    db_get r7mailfilter/db-user || true
+#    MF_DB_USER="${RET:-r7mailuser}"
+#    db_get r7mailfilter/db-pwd || true
+#    MF_DB_PWD="${RET:-saSA123$}"
+#    db_get r7mailserver/upgrade
+#    UPGRADE="$RET"
+#	echo "Current parameters:"
+#    echo "MF_DB_HOST: $MF_DB_HOST"
+#    echo "MF_DB_PORT: $MF_DB_PORT"
+#    echo "MF_DB_NAME: $MF_DB_NAME"
+#    echo "MF_DB_USER: $MF_DB_USER"
+#    echo "MF_DB_PWD: $MF_DB_PWD"
+
+}
+
+
+conf_db()
+{
+    sleep 1
+#    echo "Save database params"
+    # удаляем комментарии начало
+#    sed -i 's#^\s*\/\/.*$##g' /opt/r7-mailserver/mailfilter/appsettings.json
+#    sed -i '/^$/d' /opt/r7-mailserver/mailfilter/appsettings.json
+    # удаляем комментарии окончание
+#	jq ".ConnectionStrings.DefaultConnection = \"Username=$MF_DB_USER;Password=$MF_DB_PWD;Host=$MF_DB_HOST;Port=$MF_DB_PORT;Database=$MF_DB_NAME;\"" $APP_CONF > $APP_CONF.tmp && mv -f $APP_CONF.tmp $APP_CONF
+#	jq ".ConnectionStrings.Posix = \"Username=$MF_DB_USER;Password=$MF_DB_PWD;Host=$MF_DB_HOST;Port=$MF_DB_PORT;Database=$MF_DB_NAME;\"" $APP_CONF > $APP_CONF.tmp && mv -f $APP_CONF.tmp $APP_CONF
+}
+
+case "$1" in
+    configure)
+	read_params_debconf
+	conf_db
+
+	service supervisor reload || true
+
+	;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+	;;
+	
+	triggered)
+	;;
+	
+	*)
+		echo "postinst called with unknown argument \$1" >&2
+		exit 1
+	;;
+esac
+
+exit 0

@@ -1,0 +1,11 @@
+{
+  "ClearMemoryInterval": "00:01:00",
+  "CloseIndexInterval": "00:30:00",
+  "IndexLiveInterval": 60,
+  "NeverCloseIndex": "false",
+  "UseLocalTermRepository": "true",
+  "PercentMemoryUsage": 80,
+  "ShardCount": 16,
+  "AvailablePhysicalMemory": 12000,
+  "IndexFolder": "/var/r7-mailserver/mailsearch/index"
+}
